@@ -1,11 +1,13 @@
 {
   "name": "crud-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple CRUD API without Express",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npx nodemon",
+    "start:dev": "nodemon --exec ts-node src/index.ts",
+    "start:prod": "npm run build && node dist/index.js",
+    "build": "tsc",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,6 +35,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "uuid": "^9.0.0"
   }
 }

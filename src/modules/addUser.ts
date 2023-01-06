@@ -1,10 +1,11 @@
 import { writeFile } from 'fs';
-import { User } from './types.js';
+import { User } from '../types.js';
 import { IncomingMessage, ServerResponse } from 'http';
 import querystring from 'querystring';
 import { v4 as uuidv4 } from 'uuid';
 import { setResponseWithStatusCode } from './setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes } from './constants.js';
+import { httpMessages, httpStatusCodes, pathToData } from '../constants.js';
+import path from 'path';
 
 export function addUser(req: IncomingMessage, res: ServerResponse & { req: IncomingMessage }, users: User[]) {
   let body = '';
@@ -34,7 +35,7 @@ export function addUser(req: IncomingMessage, res: ServerResponse & { req: Incom
 
     users.push(user);
 
-    writeFile('./users.json', JSON.stringify(users), (err) => {
+    writeFile(path.resolve(pathToData), JSON.stringify(users), (err) => {
       if (err) {
         setResponseWithStatusCode(httpStatusCodes.INTERNAL_SERVER_ERROR, httpMessages.OPERATION_FAILED, res);
         return;

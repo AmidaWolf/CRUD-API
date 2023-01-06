@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { HttpStatusCodes } from './types.js';
+import { HttpStatusCodes } from '../types.js';
 
 export function setResponseWithStatusCode(
   statusCode: HttpStatusCodes,

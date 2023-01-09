@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "npx nodemon",
     "start:prod": "npm run build && node dist/index.js",
+    "start:multi": "npm run build && node dist/multi.js",
     "build": "tsc",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix",

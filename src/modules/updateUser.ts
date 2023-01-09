@@ -6,6 +6,7 @@ import querystring from 'querystring';
 import { setResponseWithStatusCode } from './setResponseWithStatusCode';
 import { httpMessages, httpStatusCodes, pathToData } from '../constants';
 import path from 'path';
+import { isJson } from './isJSON';
 
 export function updateUser(
   userId: string,
@@ -23,8 +24,9 @@ export function updateUser(
     body += chunk;
   });
   req.on('end', () => {
-    // const parsedBody = querystring.parse(body);
-    const parsedBody = JSON.parse(body);
+    let parsedBody;
+
+    isJson(body) ? (parsedBody = JSON.parse(body)) : (parsedBody = querystring.parse(body));
 
     const userIndex = users.findIndex((u) => u.id === userId);
     if (userIndex === -1) {

@@ -1,7 +1,7 @@
 import 'jest';
 import request from 'supertest';
-import { server } from '../src/index';
 import { v4 as uuidv4 } from 'uuid';
+import { server } from '../src/server';
 
 describe('API tests: 1 scenario - normal work', () => {
   afterAll((done) => {

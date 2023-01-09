@@ -26,9 +26,10 @@ Run `eslint` for linting code with fix errors.
 ## How to check, what this server really work after `npm run start:dev` or `npm run start: build`:
 Simple way is try to use `curl`:  
 `curl http://localhost:4000/api/users`. Expected response: empty array or array with users if they placed on database early.
+Or just run `npm run test`.
 
 ## How to check, what this server really work after `npm run start:multi`:
 1. Run app with `npm run start:multi`:
 2. Open console and write `url -X POST -H "Content-Type: application/json" -d 'username=Test&age=20&hobbies=['tests', 'coding']' http://localhost:4001/api/users`
-3. Write `curl http://localhost:4002/api/users/20354d7a-e4fe-47af-8ff6-187bca92f3f9`. Expected response: array with one user (`username: Test`).
+3. Write `curl http://localhost:4002/api/users`. Expected response: array with one user (`username: Test`).
 This means what state of db is consistent between different workers (4001 and 4002 port).

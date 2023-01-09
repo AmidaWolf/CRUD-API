@@ -2,21 +2,21 @@ import { createServer } from 'http';
 import { parse, UrlWithParsedQuery } from 'url';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import { getUser } from './modules/getUser.js';
-import { getUsers } from './modules/getUsers.js';
-import { setResponseWithStatusCode } from './modules/setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes, pathToData } from './constants.js';
-import { addUser } from './modules/addUser.js';
-import { updateUser } from './modules/updateUser.js';
-import { deleteUser } from './modules/deleteUser.js';
-import { User } from './types.js';
+import { getUser } from './modules/getUser';
+import { getUsers } from './modules/getUsers';
+import { setResponseWithStatusCode } from './modules/setResponseWithStatusCode';
+import { httpMessages, httpStatusCodes, pathToData } from './constants';
+import { addUser } from './modules/addUser';
+import { updateUser } from './modules/updateUser';
+import { deleteUser } from './modules/deleteUser';
+import { User } from './types';
 import path from 'path';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 
-const server = createServer(async (req, res) => {
+export const server = createServer(async (req, res) => {
   let users: User[];
 
   try {

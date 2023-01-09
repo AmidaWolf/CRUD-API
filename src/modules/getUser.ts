@@ -1,8 +1,8 @@
 import { validate as uuidValidate } from 'uuid';
 import { IncomingMessage, ServerResponse } from 'http';
-import { User } from '../types.js';
-import { setResponseWithStatusCode } from './setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes } from '../constants.js';
+import { User } from '../types';
+import { setResponseWithStatusCode } from './setResponseWithStatusCode';
+import { httpMessages, httpStatusCodes } from '../constants';
 
 export function getUser(
   userId: string,
@@ -22,5 +22,5 @@ export function getUser(
     return;
   }
 
-  setResponseWithStatusCode(httpStatusCodes.OK, JSON.stringify(user), res);
+  setResponseWithStatusCode(httpStatusCodes.OK, user, res);
 }

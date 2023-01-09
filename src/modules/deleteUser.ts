@@ -1,9 +1,9 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { User } from '../types.js';
+import { User } from '../types';
 import { writeFile } from 'fs';
 import { validate as uuidValidate } from 'uuid';
-import { setResponseWithStatusCode } from './setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes, pathToData } from '../constants.js';
+import { setResponseWithStatusCode } from './setResponseWithStatusCode';
+import { httpMessages, httpStatusCodes, pathToData } from '../constants';
 import path from 'path';
 
 export function deleteUser(
@@ -31,6 +31,6 @@ export function deleteUser(
       return;
     }
 
-    setResponseWithStatusCode(httpStatusCodes.CREATED, httpMessages.DELETE_SUCCESS, res);
+    setResponseWithStatusCode(httpStatusCodes.OK, httpMessages.DELETE_SUCCESS, res);
   });
 }

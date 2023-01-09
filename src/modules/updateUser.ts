@@ -1,10 +1,10 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { User } from '../types.js';
+import { User } from '../types';
 import { writeFile } from 'fs';
 import { validate as uuidValidate } from 'uuid';
 import querystring from 'querystring';
-import { setResponseWithStatusCode } from './setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes, pathToData } from '../constants.js';
+import { setResponseWithStatusCode } from './setResponseWithStatusCode';
+import { httpMessages, httpStatusCodes, pathToData } from '../constants';
 import path from 'path';
 
 export function updateUser(
@@ -23,7 +23,8 @@ export function updateUser(
     body += chunk;
   });
   req.on('end', () => {
-    const parsedBody = querystring.parse(body);
+    // const parsedBody = querystring.parse(body);
+    const parsedBody = JSON.parse(body);
 
     const userIndex = users.findIndex((u) => u.id === userId);
     if (userIndex === -1) {
@@ -39,7 +40,7 @@ export function updateUser(
         return;
       }
 
-      setResponseWithStatusCode(httpStatusCodes.CREATED, JSON.stringify(users[userIndex]), res);
+      setResponseWithStatusCode(httpStatusCodes.OK, users[userIndex], res);
     });
   });
 }

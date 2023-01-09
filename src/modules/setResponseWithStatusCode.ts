@@ -1,12 +1,12 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { HttpStatusCodes } from '../types.js';
+import { HttpStatusCodes, User } from '../types';
 
 export function setResponseWithStatusCode(
   statusCode: HttpStatusCodes,
-  message: string,
+  message: string | User | User[],
   res: ServerResponse & { req: IncomingMessage },
 ) {
   res.statusCode = statusCode;
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ message: message }));
+  res.end(JSON.stringify(message));
 }

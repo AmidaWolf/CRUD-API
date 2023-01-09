@@ -1,4 +1,4 @@
-import { HttpStatusCodes200, HttpStatusCodes400, HttpStatusCodes500 } from './types.js';
+import { HttpStatusCodes200, HttpStatusCodes400, HttpStatusCodes500 } from './types';
 
 export const pathToData = './src/data/data.json';
 

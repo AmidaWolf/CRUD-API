@@ -1,10 +1,10 @@
 import { writeFile } from 'fs';
-import { User } from '../types.js';
+import { User } from '../types';
 import { IncomingMessage, ServerResponse } from 'http';
 import querystring from 'querystring';
 import { v4 as uuidv4 } from 'uuid';
-import { setResponseWithStatusCode } from './setResponseWithStatusCode.js';
-import { httpMessages, httpStatusCodes, pathToData } from '../constants.js';
+import { setResponseWithStatusCode } from './setResponseWithStatusCode';
+import { httpMessages, httpStatusCodes, pathToData } from '../constants';
 import path from 'path';
 
 export function addUser(req: IncomingMessage, res: ServerResponse & { req: IncomingMessage }, users: User[]) {
@@ -14,7 +14,8 @@ export function addUser(req: IncomingMessage, res: ServerResponse & { req: Incom
     body += chunk;
   });
   req.on('end', () => {
-    const parsedBody = querystring.parse(body);
+    // const parsedBody = querystring.parse(body);
+    const parsedBody = JSON.parse(body);
 
     if (!parsedBody.username || !parsedBody.age || !parsedBody.hobbies) {
       setResponseWithStatusCode(httpStatusCodes.BAD_REQUEST, httpMessages.MISSING_FIELDS, res);
@@ -41,7 +42,7 @@ export function addUser(req: IncomingMessage, res: ServerResponse & { req: Incom
         return;
       }
 
-      setResponseWithStatusCode(httpStatusCodes.CREATED, JSON.stringify(user), res);
+      setResponseWithStatusCode(httpStatusCodes.CREATED, user, res);
     });
   });
 }

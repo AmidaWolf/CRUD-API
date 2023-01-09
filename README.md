@@ -1,8 +1,26 @@
 # CRUD-API
 
-For test server with `curl` in console:
-0. ```curl http://localhost:4000/api/users```
-1. ```curl -X POST -H "Content-Type: application/json" -d 'id=20354d7a-e4fe-47af-8ff6-187bca92f3f9&username=Test&age=20&hobbies=['tests', 'coding']' http://localhost:4000/api/users```
-2. ```curl http://localhost:4000/api/users/20354d7a-e4fe-47af-8ff6-187bca92f3f9```
-3. ```curl -X PUT -H "Content-Type: application/json" -d 'username=Test1&age=20&hobbies=['tests', 'coding']' http://localhost:4000/api/users/20354d7a-e4fe-47af-8ff6-187bca92f3f9```
-4. ```curl -X DELETE http://localhost:4000/api/users/20354d7a-e4fe-47af-8ff6-187bca92f3f9```
+## How to start working with this server
+1. Open console, go to the project folder.
+2. Run `npm install`.
+3. Run `npm run start:build` or another script in `package.json`.
+
+## Scripts  
+* `npm run start:dev`  
+Starts the application in development using `nodemon` and `ts-node` to do hot reloading.  
+* `npm run start:build`   
+Starts the app in production by first building the project with `npm run build`, and then executing the compiled JavaScript at `dist/index.js`.  
+* `npm run build`  
+Builds the app at build.
+* `npm run test`  
+Runs the `jest` tests once.
+* `npm run test:watch`  
+Run the jest tests in watch mode, waiting for file changes.
+* `npm run lint`  
+Run `eslint` for linting code.
+* `npm run format`  
+Run `eslint` for linting code with fix errors.
+
+## How to check, what this server really work after `start:dev` or `start: build`:
+Simple way is try to use `curl`:  
+```curl http://localhost:4000/api/users```

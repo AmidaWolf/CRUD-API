@@ -4,6 +4,11 @@ import { server } from '../src/index';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('API tests: 1 scenario - normal work', () => {
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+
   let userId = '';
 
   test('Get all records', async () => {
@@ -57,6 +62,11 @@ describe('API tests: 1 scenario - normal work', () => {
 });
 
 describe('API tests: 2 scenario - wrong data', () => {
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+
   test('Create new record without required fields', async () => {
     const res = await request(server)
       .post('/api/users')
@@ -97,6 +107,11 @@ describe('API tests: 2 scenario - wrong data', () => {
 });
 
 describe('API tests: 3 scenario - unexpected behavior', () => {
+  afterAll((done) => {
+    server.close();
+    done();
+  });
+
   const wrongId = 'wrongID';
 
   test('Create new record with wrong ID', async () => {

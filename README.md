@@ -3,10 +3,10 @@ Simple CRUD API with node.js,nodemon, dotenv, cross-env, typescript, ts-node, es
 
 ## How to start working with this app
 1. Clone repo
-```sh
-git clone https://github.com/AmidaWolf/CRUD-API.git
-```  
-or download [zip](https://github.com/AmidaWolf/CRUD-API/archive/refs/heads/develop.zip).
+    ```sh
+    git clone https://github.com/AmidaWolf/CRUD-API.git
+    ```
+    or download [zip](https://github.com/AmidaWolf/CRUD-API/archive/refs/heads/develop.zip).  
 2. Open console, go to the project folder `cd CRUD-API`.
 3. Run `npm install`.
 4. Run `npm run start:build` or another `run start` script in `package.json`.

@@ -36,7 +36,7 @@ Or just run `npm run test`.
 
 ## How to check, what this server really work after `npm run start:multi`:
 1. Run app with `npm run start:multi`:
-2. Open console and write `url -X POST -H "Content-Type: application/json" -d 'username=Test&age=20&hobbies=['tests', 'coding']' http://localhost:4001/api/users`
+2. Open console and write `curl -X POST -H "Content-Type: application/json" -d '{"username":"Test","age":20,"hobbies":["tests", "coding"]}' http://localhost:4001/api/users`
 3. Write `curl http://localhost:4002/api/users`. Expected response: array with one user (`username: Test`).
 This means what state of db is consistent between different workers (4001 and 4002 port).
 

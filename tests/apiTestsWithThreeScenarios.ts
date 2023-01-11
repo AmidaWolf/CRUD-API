@@ -2,10 +2,15 @@ import 'jest';
 import request from 'supertest';
 import { v4 as uuidv4 } from 'uuid';
 import { server } from '../src/server';
+import fs from 'fs';
+import path from 'path';
+import { pathToData } from '../src/constants';
 
 describe('API tests: 1 scenario - normal work', () => {
   afterAll((done) => {
-    server.close();
+    server.close(async () => {
+      await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    });
     done();
   });
 
@@ -31,6 +36,28 @@ describe('API tests: 1 scenario - normal work', () => {
     expect(res.body).toHaveProperty('id');
 
     userId = res.body.id;
+  });
+
+  test('Create two records and show three', async () => {
+    await request(server)
+      .post('/api/users')
+      .send({
+        username: 'Test1',
+        age: 20,
+        hobbies: ['tests', 'coding'],
+      });
+    await request(server)
+      .post('/api/users')
+      .send({
+        username: 'Test2',
+        age: 20,
+        hobbies: ['tests', 'coding'],
+      });
+
+    const res = await request(server).get('/api/users');
+
+    expect(res.status).toBe(200);
+    expect(res.body.length === 3);
   });
 
   test('Get record by id', async () => {
@@ -63,7 +90,9 @@ describe('API tests: 1 scenario - normal work', () => {
 
 describe('API tests: 2 scenario - wrong data', () => {
   afterAll((done) => {
-    server.close();
+    server.close(async () => {
+      await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    });
     done();
   });
 
@@ -108,7 +137,9 @@ describe('API tests: 2 scenario - wrong data', () => {
 
 describe('API tests: 3 scenario - unexpected behavior', () => {
   afterAll((done) => {
-    server.close();
+    server.close(async () => {
+      await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    });
     done();
   });
 

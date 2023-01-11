@@ -2,6 +2,9 @@ import cluster from 'cluster';
 import os from 'os';
 import dotenv from 'dotenv';
 import { server } from './server';
+import fs from 'fs';
+import path from 'path';
+import { pathToData } from './constants';
 
 dotenv.config();
 
@@ -31,14 +34,18 @@ if (cluster.isPrimary) {
 }
 
 process.on('SIGINT', () => {
-  server.close(() => {
+  server.close(async () => {
+    await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    console.log('clear data.json');
     console.log('HTTP server closed.');
     process.exit(0);
   });
 });
 
 process.on('SIGTERM', () => {
-  server.close(() => {
+  server.close(async () => {
+    await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    console.log('clear data.json');
     console.log('HTTP server closed.');
     process.exit(0);
   });

@@ -15,6 +15,11 @@ if (cluster.isPrimary) {
 
   console.log(`Master ${process.pid} is running`);
 
+  server.listen(PORT, async () => {
+    await fs.promises.writeFile(path.resolve(pathToData), JSON.stringify([]));
+    console.log(`Server running on port ${PORT} in multi.js`);
+  });
+
   for (let i = 0; i < numCores; i++) {
     cluster.fork();
   }
